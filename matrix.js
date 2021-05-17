@@ -31,6 +31,12 @@ function getColor() {
                 + moment().format('ss')  + ", 0.05)";*/
 }
 
+function getColor2() {
+    return "rgba(" + moment().format('HH') + ","
+                + moment().format('mm') + ","
+                + moment().format('ss')  + ", 0.05)";
+}
+
 function getColorHex() {
     return "#" + moment().format('HHmmss');
 }
@@ -42,7 +48,7 @@ function draw() {
     ctx.fillStyle = getColor();
     ctx.fillRect(0, 0, c.width, c.height);
 
-    ctx.fillStyle = "#BBB"; // grey text
+    ctx.fillStyle = getColor2();// "#BBB"; // grey text
     ctx.font = font_size + "px arial";
 
     // looping over drops
