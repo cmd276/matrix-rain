@@ -29,7 +29,7 @@ for (var x = 0; x < columns; x++)
 
 function getColor() {
     //0, 5, 140
-    return "rgba( 15, 15, 15, 0.05)";
+    return "rgba( 0, 0, 0, 0.05)";
     /*return "rgba(" + moment().format('HH') + ","
                 + moment().format('mm') + ","
                 + moment().format('ss')  + ", 0.05)";*/
