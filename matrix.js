@@ -24,9 +24,11 @@ for (var x = 0; x < columns; x++)
     drops[x] = 1;
 
 function getColor() {
-    return "rgba(" + moment().format('HH') + ","
+    //0, 5, 140
+    return "rgba( 0, 5, 140, 0.05)";
+    /*return "rgba(" + moment().format('HH') + ","
                 + moment().format('mm') + ","
-                + moment().format('ss')  + ", 0.05)";
+                + moment().format('ss')  + ", 0.05)";*/
 }
 
 function getColorHex() {
