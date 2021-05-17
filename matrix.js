@@ -37,7 +37,7 @@ function getColorHex() {
 function draw() {
     // Get the BG color based on the current time i.e. rgb(hh, mm, ss)
     // translucent BG to show trail
-    ctx.fillStyle = getColor();
+    ctx.fillStyle = "#00058c" //getColor();
     ctx.fillRect(0, 0, c.width, c.height);
 
     ctx.fillStyle = "#BBB"; // grey text
