@@ -16,6 +16,10 @@ var characters = (hanzi + katakana + sanskrit + gurmukhi + hex).split("");
 var font_size = 12;
 var columns = c.width/font_size;    // number of columns for the rain
 
+
+var colours = [ Math.random() * 255, Math.random() * 255, Math.random() * 255 ];
+var colourModes = [ -1, -1, -1 ];
+
 // an array of drops - one per column
 var drops = [];
 // x below is the x coordinate
@@ -25,20 +29,20 @@ for (var x = 0; x < columns; x++)
 
 function getColor() {
     //0, 5, 140
-    return "rgba( 0, 5, 140, 0.05)";
+    return "rgba( 15, 15, 15, 0.05)";
     /*return "rgba(" + moment().format('HH') + ","
                 + moment().format('mm') + ","
                 + moment().format('ss')  + ", 0.05)";*/
 }
 
 function getColor2() {
-    return "rgba(" + moment().format('HH') + ","
-                + moment().format('mm') + ","
-                + moment().format('ss')  + ", 0.05)";
+    return "rgba(" + colours[0] + ","
+                + colours[1] + ","
+                + colours[2] + ", 1)";
 }
 
 function getColorHex() {
-    return "#" + moment().format('HHmmss');
+    return "#" + moment().format('ss');
 }
 
 // drawing the characters
@@ -48,7 +52,7 @@ function draw() {
     ctx.fillStyle = getColor();
     ctx.fillRect(0, 0, c.width, c.height);
 
-    ctx.fillStyle = getColor2();// "#BBB"; // grey text
+    ctx.fillStyle = getColor2(); //"#888"; // grey text
     ctx.font = font_size + "px arial";
 
     // looping over drops
@@ -67,4 +71,31 @@ function draw() {
         drops[i]++;
     }
 }
-setInterval(draw, 33);
+setInterval(draw, 10);
+
+var colours = [ Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0) ];
+var colourModes = [ false, false, false ];
+function AdjustColour() 
+{
+    for(var i = 0; i < colours.length; ++i)
+    {
+        if (colours[i] >= 255)
+        {
+            colourModes[i] = false;
+        }
+        if (colours[i] <= 30)
+        {
+            colourModes[i] = true;
+        }
+        
+        if ( ! colourModes[i])
+        {
+            colours[i]--;
+        }
+        else
+        {
+            colours[i]++;
+        }
+    }
+}
+setInterval(AdjustColour, 125);
