@@ -71,7 +71,7 @@ function draw() {
         drops[i]++;
     }
 }
-setInterval(draw, 10);
+setInterval(draw, 75);
 
 var colours = [ Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0) ];
 var colourModes = [ false, false, false ];
