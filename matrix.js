@@ -11,8 +11,10 @@ var sanskrit = "१२३४५६७८९अरतयपसदगहजकल�
 var hanzi = "田由甲申甴电甶男甸甹町画甼甽甾甿畀畁畂畃畄畅畆畇畈畉畊畋界畍畎畏畐畑呂"
 var katakana = "゠クタハムヰアケチヒモヲィコッャンイツヤウゥサフュヵテユヶェショワエトヘヨォスラヱオナリカセニホル・ヌレーキソネロヽノマヮミ"
 var hex = "ABCDEF01234567890"
+var alpha = "qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP"
+var symbol = "`~!@#$%^&*()_+-={}|[]\:;<,>.?/'\""
 // converting the string into an array of single characters
-var characters = (hanzi + katakana + sanskrit + gurmukhi + hex).split("");
+var characters = (hanzi + katakana + sanskrit + gurmukhi + hex + alpha + symbol).split("");
 var font_size = 12;
 var columns = c.width/font_size;    // number of columns for the rain
 
