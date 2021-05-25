@@ -7,14 +7,9 @@ var drops = [];
 
 function setBasicInfo()
 {
-    var body = document.body,
-    html = document.documentElement;
-
-var height = Math.max( body.scrollHeight, body.offsetHeight, 
-                       html.clientHeight, html.scrollHeight, html.offsetHeight );
     console.log(height);
     // making the canvas full screen
-    c.height = height;
+    c.height = getNewHeight();
     console.log(c.height);
     c.width = window.innerWidth;
     font_size = 12;
@@ -25,7 +20,22 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
         if (isNaN(drops[x]))
             drops[x] = 1;
 }
+
+function getNewHeight()
+{
+        var body = document.body,
+    html = document.documentElement;
+
+var height = Math.max( body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+return height;
+}
+
+
 setBasicInfo();
+
+
+
 
 // the characters
 var gurmukhi = "੧੨੩੪੫੬੭੮੯੦ੳਅਰਤਯਪਸਦਗਹਜਕਲਙੜਚਵਬਨਮੲਥਫਸ਼ਧਘਝਖਲ਼ੜ੍ਹਛਭਣ"
@@ -69,7 +79,7 @@ function getColor3 ()
 
 // drawing the characters
 function draw() {
-    if ((c.width != window.innerWidth) || (c.height != window.innerHeight))
+    if ((c.width != window.innerWidth) || (c.height != getNewHeight()))
     {
         setBasicInfo();
     }
@@ -100,8 +110,7 @@ function draw() {
     }
 }
 
-var timer = 64;
-setInterval(draw, timer);
+setInterval(draw, 64);
 
 var colours = [ Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0) ];
 var colourModes = [ false, false, false ];
