@@ -1,15 +1,37 @@
 var c = document.getElementById("matrix");
 var ctx = c.getContext("2d");
+var font_size;
+var columns;    // number of columns for the rain
+// an array of drops - one per column
+var drops = [];
 
-var body = document.body,
-    html = document.documentElement;
+function setBasicInfo()
+{
+    var height = getHeightOrWidth("height");
+    console.log("test");
+    // making the canvas full screen
+    c.height = window.innerHeight;
+    c.width = window.innerWidth;
+    font_size = 12;
+    columns = c.width/font_size;    // number of columns for the rain
+    // x below is the x coordinate
+    // 1 = y-coordinate of the drop (same for every drop initially)
+    for (var x = 0; x < columns; x++)
+        if (isNaN(drops[x]))
+            drops[x] = 1;
+}
+setBasicInfo();
 
-var height = Math.max( body.scrollHeight, body.offsetHeight, 
-                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+function getHeightOrWidth(str)
+{
+    var body = document.body,
+        html = document.documentElement;
 
-// making the canvas full screen
-c.height = height;
-c.width = window.innerWidth;
+    if (str == "height")
+        return Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+    else if (str == "width")
+        return Math.min(body.scrollWidth, html.scrollWidth);
+}
 
 // the characters
 var gurmukhi = "੧੨੩੪੫੬੭੮੯੦ੳਅਰਤਯਪਸਦਗਹਜਕਲਙੜਚਵਬਨਮੲਥਫਸ਼ਧਘਝਖਲ਼ੜ੍ਹਛਭਣ"
@@ -21,19 +43,9 @@ var alpha = "qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP"
 var symbol = "`~!@#$%^&*()_+-={}|[]\:;<,>.?/'\""
 // converting the string into an array of single characters
 var characters = (hanzi + katakana + sanskrit + gurmukhi + hex + alpha + symbol).split("");
-var font_size = 12;
-var columns = c.width/font_size;    // number of columns for the rain
-
 
 var colours = [ Math.random() * 255, Math.random() * 255, Math.random() * 255 ];
 var colourModes = [ -1, -1, -1 ];
-
-// an array of drops - one per column
-var drops = [];
-// x below is the x coordinate
-// 1 = y-coordinate of the drop (same for every drop initially)
-for (var x = 0; x < columns; x++)
-    drops[x] = 1;
 
 function getColor() {
     //0, 5, 140
@@ -49,12 +61,26 @@ function getColor2() {
                 + colours[2] + ", 1)";
 }
 
-function getColorHex() {
-    return "#" + moment().format('ss');
+function getColor3 ()
+{
+    var c = [];
+    c[0] = Math.abs(colours[0] - 255);
+    c[1] = Math.abs(colours[1] - 255);
+    c[2] = Math.abs(colours[2] - 255);
+    
+    return "rgba(" + c[0] + ","
+                + c[1] + ","
+                + c[2] + ", 0.05)";
 }
 
 // drawing the characters
 function draw() {
+    if ((c.width != getHeightOrWidth("width")) || (c.height != getHeightOrWidth("height")))
+    {
+        console.log("new res");
+        setBasicInfo();
+    }
+    
     // Get the BG color based on the current time i.e. rgb(hh, mm, ss)
     // translucent BG to show trail
     ctx.fillStyle = getColor();
@@ -79,11 +105,13 @@ function draw() {
         drops[i]++;
     }
 }
-setInterval(draw, 75);
+
+var timer = 64;
+setInterval(draw, timer);
 
 var colours = [ Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0) ];
 var colourModes = [ false, false, false ];
-function AdjustColour() 
+function AdjustColour()
 {
     for(var i = 0; i < colours.length; ++i)
     {
@@ -106,4 +134,4 @@ function AdjustColour()
         }
     }
 }
-setInterval(AdjustColour, 125);
+setInterval(AdjustColour, 16);
