@@ -1,8 +1,14 @@
 var c = document.getElementById("matrix");
 var ctx = c.getContext("2d");
 
+var body = document.body,
+    html = document.documentElement;
+
+var height = Math.max( body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+
 // making the canvas full screen
-c.height = window.innerHeight;
+c.height = height;
 c.width = window.innerWidth;
 
 // the characters
