@@ -7,9 +7,15 @@ var drops = [];
 
 function setBasicInfo()
 {
-    console.log("test");
+    var body = document.body,
+    html = document.documentElement;
+
+var height = Math.max( body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+    console.log(height);
     // making the canvas full screen
     c.height = window.innerHeight;
+    console.log(c.height);
     c.width = window.innerWidth;
     font_size = 12;
     columns = c.width/font_size;    // number of columns for the rain
@@ -65,7 +71,6 @@ function getColor3 ()
 function draw() {
     if ((c.width != window.innerWidth) || (c.height != window.innerHeight))
     {
-        console.log("new res");
         setBasicInfo();
     }
     
