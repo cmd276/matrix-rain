@@ -7,7 +7,6 @@ var drops = [];
 
 function setBasicInfo()
 {
-    console.log(height);
     // making the canvas full screen
     c.height = getNewHeight();
     console.log(c.height);
