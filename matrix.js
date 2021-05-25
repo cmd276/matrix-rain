@@ -14,7 +14,7 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
                        html.clientHeight, html.scrollHeight, html.offsetHeight );
     console.log(height);
     // making the canvas full screen
-    c.height = window.innerHeight;
+    c.height = height;
     console.log(c.height);
     c.width = window.innerWidth;
     font_size = 12;
