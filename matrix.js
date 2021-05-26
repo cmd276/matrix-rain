@@ -109,7 +109,6 @@ function draw() {
     }
 }
 
-setInterval(draw, 64);
 
 var colours = [ Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0) ];
 var colourModes = [ false, false, false ];
@@ -136,4 +135,5 @@ function AdjustColour()
         }
     }
 }
+setInterval(draw, 64);
 setInterval(AdjustColour, 16);
