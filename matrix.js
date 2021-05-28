@@ -129,6 +129,6 @@ function AdjustColour()
 // Set some basic information about the canvas.
 setBasicInfo();
 // Run the draw command every so often.
-setInterval(draw, 64);
+setInterval(draw, 33);
 // Change the font colour every so often.
-setInterval(AdjustColour, 16);
+setInterval(AdjustColour, 66);
