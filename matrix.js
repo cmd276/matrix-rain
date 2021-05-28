@@ -57,7 +57,7 @@ function getColor() {
 }
 
 // Used for grabbing the colour for the font.
-function getColor2() {
+function getFontColor() {
     return "rgba(" + colours[0] + ","
                 + colours[1] + ","
                 + colours[2] + ", 1)";
@@ -77,7 +77,7 @@ function draw() {
     ctx.fillRect(0, 0, c.width, c.height);
     
     // Was originally coloured to #888. I changed it to a sliding value.
-    ctx.fillStyle = getColor2(); //"#888"; // grey text
+    ctx.fillStyle = getFontColor(); //"#888"; // grey text
     ctx.font = font_size + "px arial";
 
     // looping over drops
