@@ -1,4 +1,4 @@
-#About
+# About
 Based on the sigstart's version of Matrix Rain.
 Changed the colour changing background to static black.
 Changed static white font to colour changing.
