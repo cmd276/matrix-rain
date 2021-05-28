@@ -51,13 +51,8 @@ function getNewHeight()
     return height;
 }
 
-// Although technically not needed, left for historical reasons.
-function getColor() {
-    return "rgba( 0, 0, 0, 0.05)";
-}
-
 // Used for grabbing the colour for the font.
-function getFontColor() {
+function getFontColour() {
     return "rgba(" + colours[0] + ","
                 + colours[1] + ","
                 + colours[2] + ", 1)";
@@ -73,11 +68,11 @@ function draw() {
     
     // Get the BG color based on the current time i.e. rgb(hh, mm, ss)
     // translucent BG to show trail
-    ctx.fillStyle = getColor();
+    ctx.fillStyle = "rgba( 0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, c.width, c.height);
     
     // Was originally coloured to #888. I changed it to a sliding value.
-    ctx.fillStyle = getFontColor(); //"#888"; // grey text
+    ctx.fillStyle = getFontColour(); //"#888"; // grey text
     ctx.font = font_size + "px arial";
 
     // looping over drops
