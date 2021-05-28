@@ -7,6 +7,7 @@ Changed static white font to colour changing.
 Matrix-like animation using HTML5 Canvas and JavaScript. Inspired from [sample code](http://thecodeplayer.com/walkthrough/matrix-rain-animation-html5-canvas-javascript)
 on [thecodeplayer.com](http://thecodeplayer.com/).
 
-#Demos
+# Demos
 [sigstart's demo](https://sigstart.github.io/matrix-rain)
+
 [My demo](https://cmd276.github.io/matrix-rain)
