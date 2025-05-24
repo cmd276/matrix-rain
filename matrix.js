@@ -1,12 +1,13 @@
 /* --------------------------------------------------------------- Variables. */
 /* -------------------------------------------------------------------------- */
-
+console.log("Loading Vars...");
 var c = document.getElementById("matrix");
 var ctx = c.getContext("2d");
 var font_size = 12;
 var columns;    // number of columns for the rain
 // an array of drops - one per column
 var drops = [];
+var drops_colors = [];
 
 // the characters
 var gurmukhi = "੧੨੩੪੫੬੭੮੯੦ੳਅਰਤਯਪਸਦਗਹਜਕਲਙੜਚਵਬਨਮੲਥਫਸ਼ਧਘਝਖਲ਼ੜ੍ਹਛਭਣ";
@@ -21,11 +22,12 @@ var symbol = "`~!@#$%^&*()_+-={}|[]\:;<,>.?/'\"";
 var characters = (hanzi + katakana + sanskrit + gurmukhi + hex + alpha + symbol).split("");
 
 // These arrays are responsible for Colour representation of the font on the page.
-var colours = [ Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0) ];
-var colourModes = [ false, false, false ];
+// var colours = [ Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0) ];
+var colourModes = [];
 
 /* -------------------------------------------------- Functions Declarations. */
 /* -------------------------------------------------------------------------- */
+console.log("Loading Functions Declarations...");
 
 function setBasicInfo()
 {
@@ -36,8 +38,11 @@ function setBasicInfo()
     // x below is the x coordinate
     // 1 = y-coordinate of the drop (same for every drop initially)
     for (var x = 0; x < columns; x++)
-        if (isNaN(drops[x])) // Added to conpensate for Window resizing. 
+        if (isNaN(drops[x])) { // Added to conpensate for Window resizing. 
             drops[x] = 1;
+			drops_colors[x] = [ Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0), Math.floor(Math.random() * 256|0) ];
+			colourModes[x] = [ false, false, false ];
+		}
 }
 
 // This was partially pulled from StackOverflow. It returns the largest value of heights of the web page we're loaded on.
@@ -52,10 +57,10 @@ function getNewHeight()
 }
 
 // Used for grabbing the colour for the font.
-function getFontColour() {
-    return "rgba(" + colours[0] + ","
-                + colours[1] + ","
-                + colours[2] + ", 1)";
+function getFontColour(color) {
+    return "rgba(" + color[0] + ","
+                + color[1] + ","
+                + color[2] + ", 1)";
 }
 
 // drawing the characters
@@ -72,11 +77,11 @@ function draw() {
     ctx.fillRect(0, 0, c.width, c.height);
     
     // Was originally coloured to #888. I changed it to a sliding value.
-    ctx.fillStyle = getFontColour(); //"#888"; // grey text
     ctx.font = font_size + "px arial";
 
     // looping over drops
     for (var i = 0; i < drops.length; i++) {
+    ctx.fillStyle = getFontColour(drops_colors[i]); //"#888"; // grey text
         // a random character to print
         var text = characters[Math.floor(Math.random() * characters.length)];
         // x = i * font_size, y = value of drops[i] * font_size
@@ -94,41 +99,45 @@ function draw() {
 
 function AdjustColour()
 {
-    // For each colour value (should only be 3)
-    for(var i = 0; i < colours.length; ++i)
-    {
-        // If our colour value is at or above 255, set the corresponding mode to false.
-        // It being false tells the script to decrement instead of increment.
-        if (colours[i] >= 255)
-        {
-            colourModes[i] = false;
-        }
-        
-        // Since the background is black, a margin of 30 is added to attempt to keep from having black text on black bg.
-        // If our colour value is at or below 30, set our corresponding to true.
-        // It being true will tell the script to increment the value instead of decrementing it.
-        if (colours[i] <= 30)
-        {
-            colourModes[i] = true;
-        }
-        
-        // Are we increasing or decreasing the colour value?
-        if ( ! colourModes[i])
-        {
-            colours[i]--;
-        }
-        else
-        {
-            colours[i]++;
-        }
-    }
+	for (x = 0; x < drops_colors.length; ++x)
+	{
+		// For each colour value (should only be 3)
+		for(var i = 0; i < drops_colors[x].length; ++i)
+		{
+			// If our colour value is at or above 255, set the corresponding mode to false.
+			// It being false tells the script to decrement instead of increment.
+			if (drops_colors[x][i] >= 255)
+			{
+				colourModes[x][i] = false;
+			}
+			
+			// Since the background is black, a margin of 30 is added to attempt to keep from having black text on black bg.
+			// If our colour value is at or below 30, set our corresponding to true.
+			// It being true will tell the script to increment the value instead of decrementing it.
+			if (drops_colors[x][i] <= 30)
+			{
+				colourModes[x][i] = true;
+			}
+			
+			// Are we increasing or decreasing the colour value?
+			if ( ! colourModes[x][i])
+			{
+				drops_colors[x][i]--;
+			}
+			else
+			{
+				drops_colors[x][i]++;
+			}
+		}
+	}
 }
 /* ---------------------------------------------------------- Function Calls. */
 /* -------------------------------------------------------------------------- */
+console.log("Executing Function Calls...");
 
 // Set some basic information about the canvas.
 setBasicInfo();
 // Run the draw command every so often.
 setInterval(draw, 33);
 // Change the font colour every so often.
-setInterval(AdjustColour, 66);
+setInterval(AdjustColour, 33);
